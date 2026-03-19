@@ -1,25 +1,24 @@
-# GitHub-қа жүктеу (терминал арқылы)
+# GitHub-қа жүктеу (ParmanBekarys/BiologyTwo)
 
-1. Терминалды ашып жоба папкасына кіріңіз:
-   ```
-   cd "c:\Users\Бекарыс\Documents\HTML\BiologyTwo"
-   ```
+Терминалды ашып төмендегі командаларды **бірінен соң бірін** орындаңыз.
 
-2. Git инициализация және алғашқы коммит:
-   ```
-   git init
-   git add .
-   git commit -m "Алғашқы жүктеу"
-   ```
+1) Жоба папкасына кіру:
+```
+cd "c:\Users\Бекарыс\Documents\HTML\BiologyTwo"
+```
 
-3. GitHub-та жасаған репозиторийді "remote" қосыңыз (YOUR_USERNAME және BiologyTwo орнына өз логиніңізді жазыңыз):
-   ```
-   git remote add origin https://github.com/YOUR_USERNAME/BiologyTwo.git
-   ```
+2) Git іске қосу және барлық файлдарды қосу:
+```
+git init
+git add .
+git commit -m "first commit"
+```
 
-4. Жіберу:
-   ```
-   git branch -M main
-   git push -u origin main
-   ```
-   (Кіру сұрағанда GitHub логин/пароль немесе токен енгізіңіз.)
+3) GitHub репозиторийді қосу және жіберу:
+```
+git remote add origin https://github.com/ParmanBekarys/BiologyTwo.git
+git branch -M main
+git push -u origin main
+```
+
+Кіру сұрағанда: GitHub **username** және **пароль** (немесе Personal Access Token) енгізіңіз.
