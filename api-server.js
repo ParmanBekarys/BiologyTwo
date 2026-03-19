@@ -6,7 +6,15 @@ const app = express();
 
 const allowedOrigins = (
   process.env.ALLOWED_ORIGINS ||
-  "http://localhost:5503,http://127.0.0.1:5503,http://localhost:3000,http://127.0.0.1:3000,https://biologysmart.parmanbekaris.workers.dev"
+  [
+    "http://localhost:5503",
+    "http://127.0.0.1:5503",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://biologysmart.parmanbekaris.workers.dev",
+    "https://biologysmart.org",
+    "https://www.biologysmart.org",
+  ].join(",")
 )
   .split(",")
   .map((origin) => origin.trim())
