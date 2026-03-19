@@ -3,9 +3,7 @@ import {
   collection,
   getDocs,
   doc,
-  getDoc,
-  updateDoc,
-  setDoc,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
 const container = document.getElementById("lessons-container");
@@ -15,10 +13,10 @@ async function loadLessons() {
   try {
     const querySnapshot = await getDocs(collection(db, "lessons"));
 
-    querySnapshot.forEach((doc) => {
-      const lesson = doc.data();
+    querySnapshot.forEach((lessonDoc) => {
+      const lesson = lessonDoc.data();
       const image = lesson.image ? lesson.image : defaultImage;
-      const lessonId = doc.id;
+      const lessonId = lessonDoc.id;
 
       const card = document.createElement("div");
       card.className = "lazyColumnLesson";
@@ -41,9 +39,9 @@ async function loadLessons() {
               class="startButton"
               data-lesson-id="${lessonId}"
               style="background:#b3261e;"
-              title="Осы сабақтың барлық сұрақтарын өшіру"
+              title="Осы сабақтың сұрақтар құжатын толық өшіру"
             >
-              Сұрақты өшіру
+              Өшіру
             </button>
           </div>
         </div>
@@ -51,63 +49,22 @@ async function loadLessons() {
 
       container.appendChild(card);
 
-      const deleteBtn = card.querySelector('button[data-lesson-id="${lessonId}"]');
+      const deleteBtn = card.querySelector(
+        `button[data-lesson-id="${lessonId}"]`
+      );
       if (!deleteBtn) return;
 
       deleteBtn.addEventListener("click", async () => {
         const lessonIdToDelete = deleteBtn.getAttribute("data-lesson-id");
         if (!lessonIdToDelete) return;
 
-        const ok = confirm("Расында осы сабақтың барлық сұрақтарын өшіргіңіз келе ме?");
+        const ok = confirm("Расында осы сабақтың сұрақтар құжатын толық өшіргіңіз келе ме?");
         if (!ok) return;
 
         try {
           const questionsRef = doc(db, "questions", lessonIdToDelete);
-          const lessonRef = doc(db, "lessons", lessonIdToDelete);
-
-          const beforeQuestionsSnap = await getDoc(questionsRef);
-          const beforeQuestions = beforeQuestionsSnap.exists()
-            ? beforeQuestionsSnap.data().questions || []
-            : [];
-
-          const beforeLessonSnap = await getDoc(lessonRef);
-          const beforeLessonQuestions = beforeLessonSnap.exists()
-            ? beforeLessonSnap.data().questions
-            : undefined;
-
-          alert(
-            `ӨШІРУ АЛДЫНДА:\nquestions/{lessonId} саны: ${beforeQuestions.length}\nlessons.questions: ${beforeLessonQuestions}`
-          );
-
-          await setDoc(questionsRef, {
-            lessonId: lessonIdToDelete,
-            questions: [],
-          });
-
-          // UI карточкада көрсетілетін lesson.questions мәнін де 0 қыламыз.
-          // Егер lesson құжаты жоқ болса, skip жасаймыз.
-          try {
-            await updateDoc(lessonRef, { questions: 0 });
-          } catch (e) {
-            // ignore
-          }
-
-          const afterQuestionsSnap = await getDoc(questionsRef);
-          const afterQuestions = afterQuestionsSnap.exists()
-            ? afterQuestionsSnap.data().questions || []
-            : [];
-
-          const afterLessonSnap = await getDoc(lessonRef);
-          const afterLessonQuestions = afterLessonSnap.exists()
-            ? afterLessonSnap.data().questions
-            : undefined;
-
-          alert(
-            `ӨШІРУДЕН КЕЙІН:\nquestions/{lessonId} саны: ${afterQuestions.length}\nlessons.questions: ${afterLessonQuestions}`
-          );
-
-          // Пайдаланушыға ыңғайлы болу үшін бетті қайта жүктейміз.
-          // Quiz бетінде нақты сұрақтар бос массив болғандықтан жұмыс істейді.
+          await deleteDoc(questionsRef);
+          alert("Сұрақтар құжаты толық өшірілді!");
           window.location.href = "admin_tests_lessons.html";
         } catch (error) {
           console.error("Сұрақтарды өшіру қатесі:", error);

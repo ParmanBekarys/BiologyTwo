@@ -1,5 +1,10 @@
 import { db } from "./firebase.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+import {
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
 const container = document.getElementById("standalone-tests-container");
 
@@ -34,11 +39,48 @@ async function loadStandaloneTests() {
           <p style="color:rgba(255,255,255,0.8);">${test.timeLimit || 0} минут | ${questionsCount} сұрақ</p>
         </div>
         <div class="lessonButton">
-          <a href="addStandaloneQuestion.html?testId=${docSnap.id}" class="startButton">Сұрақ қосу</a>
+          <div style="display:flex;gap:10px;justify-content:center;width:100%;">
+            <a href="addStandaloneQuestion.html?testId=${docSnap.id}" class="startButton" style="text-decoration:none;display:inline-flex;justify-content:center;">
+              Сұрақ қосу
+            </a>
+            <button
+              type="button"
+              class="startButton"
+              data-test-id="${docSnap.id}"
+              style="background:#b3261e;"
+              title="Осы тест құжатын толық өшіру"
+            >
+              Өшіру
+            </button>
+          </div>
         </div>
       `;
 
       container.appendChild(card);
+
+      const deleteBtn = card.querySelector(
+        `button[data-test-id="${docSnap.id}"]`
+      );
+
+      if (!deleteBtn) return;
+
+      deleteBtn.addEventListener("click", async () => {
+        const testId = deleteBtn.getAttribute("data-test-id");
+        if (!testId) return;
+
+        const ok = confirm("Расында осы тест құжатын толық өшіргіңіз келе ме?");
+        if (!ok) return;
+
+        try {
+          const testRef = doc(db, "standaloneTests", testId);
+          await deleteDoc(testRef);
+          alert("Тест құжаты толық өшірілді!");
+          window.location.href = "admin_tests_standalone.html";
+        } catch (error) {
+          console.error("Сұрақтарды өшіру қатесі:", error);
+          alert("Сұрақтарды өшіру мүмкін болмады!");
+        }
+      });
     });
   } catch (error) {
     console.error("Тесттерді жүктеу қатесі:", error);

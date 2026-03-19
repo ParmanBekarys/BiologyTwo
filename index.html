@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiologyTwo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #edf7ff 0%, #f8fbff 100%);
+      color: #1f2937;
+    }
+
+    .topbar {
+      width: 100%;
+      padding: 18px 28px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .login-btn {
+      text-decoration: none;
+      background: #0f4d0f;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: opacity 0.2s ease;
+    }
+
+    .login-btn:hover {
+      opacity: 0.9;
+    }
+
+    .hero {
+      max-width: 900px;
+      margin: 60px auto 0;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 48px);
+      margin-bottom: 14px;
+      color: #0b3a63;
+    }
+
+    .hero p {
+      font-size: clamp(16px, 2.5vw, 20px);
+      line-height: 1.6;
+      color: #374151;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .info {
+      margin-top: 28px;
+      color: #4b5563;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="login-btn" href="./auth/auth.html">Login</a>
+  </header>
+
+  <main class="hero">
+    <h1>BiologyTwo платформасына қош келдіңіз</h1>
+    <p>
+      Бұл платформа биология пәнін ыңғайлы түрде оқуға көмектеседі:
+      сабақтарды өту, тест тапсыру және білімді бекіту.
+    </p>
+    <p class="info">
+      Жүйеге кіру үшін жоғарғы жақтағы Login батырмасын басыңыз.
+    </p>
+  </main>
+</body>
+</html>
