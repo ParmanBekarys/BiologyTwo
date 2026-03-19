@@ -17,10 +17,12 @@ const corsOptions = {
     // Server-to-server calls (no Origin header) should still work.
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(new Error(`CORS blocked for origin: ${origin}`));
+    // Error емес false: кейбір ортада OPTIONS 500 болып CORS headerсыз қалуы мүмкін
+    return callback(null, false);
   },
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 204,
 };
 
 app.use(
