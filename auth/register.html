@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тіркелу</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="auth-logo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+            </div>
+            <h1>Жаңа аккаунт</h1>
+            <p>Биологияны үйренуге қош келдіңіз</p>
+        </div>
+
+        <div class="auth-body">
+            <h2>Тіркелу</h2>
+
+            <form id="registerForm" class="auth-form">
+                <div class="input-group">
+                    <input type="text" id="name" required placeholder=" ">
+                    <label>Аты</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="surname" required placeholder=" ">
+                    <label>Тегі</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" required placeholder=" ">
+                    <label>Email</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" id="password" required placeholder=" ">
+                    <label>Пароль</label>
+                </div>
+
+                <button type="button" id="registerBtn" class="auth-btn">Тіркелу</button>
+                <p id="message"></p>
+            </form>
+        </div>
+
+        <div class="auth-footer">
+            <span class="footer-text">Аккаунтыңыз бар ма?</span>
+            <a href="auth.html">Кіру</a>
+        </div>
+    </div>
+
+    <script type="module" src="register.js"></script>
+
+</body>
+
+</html>

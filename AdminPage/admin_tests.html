@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ — Тест сұрақтар</title>
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <a href="admin.html" class="back-to-admin" title="Админ бетке">
+    <img src="../assets/left.svg" alt="Артқа">
+  </a>
+
+  <div class="admin-container">
+    <h1 class="admin-title">Тест сұрақтар</h1>
+    <p class="admin-subtitle">Қай тест түрін басқарғыңыз келеді?</p>
+
+    <div class="card-grid">
+      <div class="admin-card" onclick="location.href='admin_tests_lessons.html'">
+        <div class="card-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h2>Сабаққа тест қосу</h2>
+        <p>Барлық сабақтарға сұрақ қосу</p>
+      </div>
+
+      <div class="admin-card" onclick="location.href='admin_tests_standalone.html'">
+        <div class="card-icon" style="background-color:#1E7F9A;">
+          <i class="fas fa-fire-alt"></i>
+        </div>
+        <h2>Тест сұрақтарын қосу</h2>
+        <p>Қиын тесттер — уақыт шегімен</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+</body>
+
+</html>

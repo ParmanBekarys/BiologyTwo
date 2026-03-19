@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сабақты өзгерту</title>
+  <link rel="stylesheet" href="updateLesson.css">
+</head>
+<body>
+  <a href="admin_lessons.html" class="back-to-admin" title="Сабақтар тізіміне">
+    <img src="../assets/left.svg" alt="Артқа">
+  </a>
+  <div class="container">
+    <h1>Сабақты өзгерту</h1>
+
+    <form id="updateForm">
+      <input type="text" id="title" placeholder="Сабақ атауы">
+      <input type="text" id="time" placeholder="Уақыты (минут)">
+      <input type="number" id="questions" placeholder="Сұрақ саны">
+      <input type="text" id="video" placeholder="Бейне сілтеме (YouTube)">
+      <textarea id="conspect" placeholder="Конспект"></textarea>
+      <label>Сурет сілтемесі (URL):</label>
+      <input type="text" id="image" placeholder="https://... немесе ../assets/lesson.jpg">
+
+      <button type="submit">Сақтау</button>
+    </form>
+  </div>
+
+  <script type="module" src="updateLesson.js"></script>
+</body>
+</html>

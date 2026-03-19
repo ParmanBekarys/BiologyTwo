@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <main class="screen">
+        <header class="header">
+            <button class="menu-btn" id="menuBtn" aria-label="Мәзір">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="profile-menu hidden" id="profileMenu" aria-hidden="true">
+                <button type="button" class="profile-menu-item logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                    <span>Шығу</span>
+                </button>
+            </div>
+            <div class="header-shapes" aria-hidden="true"></div>
+            <div class="header-wave" aria-hidden="true"></div>
+        </header>
+
+        <section class="card">
+            <div class="avatar-wrap">
+                <img id="avatar" class="avatar" src="https://i.pinimg.com/736x/3f/b1/9a/3fb19af0a8a82324b81596ee027097ee.jpg" alt="Профиль">
+            </div>
+
+            <h1 class="profile-name" id="profileName">Tima bouzid</h1>
+            <p class="profile-subtitle" id="profileSubtitle">Web Designer • Morocco</p>
+
+            <div class="stats-row" role="list" aria-label="Статистика">
+                <div class="stat-item" role="listitem">
+                    <span class="stat-value" id="statScore">20.7ex</span>
+                    <span class="stat-label">score</span>
+                </div>
+                <div class="stat-item" role="listitem">
+                    <span class="stat-value" id="statFollowers">3.6K</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+                <div class="stat-item" role="listitem">
+                    <span class="stat-value" id="statFollowing">1.2K</span>
+                    <span class="stat-label">Following</span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="button" class="primary-btn" id="editBtn">Edit profile</button>
+                <button type="button" class="icon-btn" id="shareBtn" aria-label="Share">
+                    <span class="material-symbols-outlined" aria-hidden="true">ios_share</span>
+                </button>
+            </div>
+
+            <div class="tabs" role="tablist" aria-label="Profile tabs">
+                <button type="button" class="tab active" role="tab" aria-selected="true" data-tab="achievements">Achievements</button>
+                <button type="button" class="tab" role="tab" aria-selected="false" data-tab="about">About</button>
+            </div>
+
+            <div class="content">
+                <div class="content-panel" id="achievementsPanel" data-panel="achievements">
+                    <div class="achievements-grid" id="achievementsGrid"></div>
+                </div>
+                <div class="content-panel hidden" id="aboutPanel" data-panel="about">
+                    <div class="grid" id="profileGrid">
+                        <div class="grid-card pastel-1"></div>
+                        <div class="grid-card pastel-2"></div>
+                        <div class="grid-card pastel-3"></div>
+                        <div class="grid-card pastel-4"></div>
+                        <div class="grid-card pastel-5"></div>
+                        <div class="grid-card pastel-6"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Edit profile modal -->
+    <div id="editProfileModal" class="edit-modal hidden" aria-hidden="true">
+        <div class="edit-modal-backdrop" data-close="true"></div>
+        <div class="edit-modal-card" role="dialog" aria-modal="true" aria-label="Edit profile">
+            <button type="button" class="edit-modal-close" id="editProfileClose" aria-label="Close">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h2 class="edit-title">Edit profile</h2>
+            <form id="editProfileForm" class="edit-form">
+                <label class="edit-field">
+                    <span class="edit-label">Аты</span>
+                    <input id="editName" class="edit-input" type="text" autocomplete="given-name" />
+                </label>
+                <label class="edit-field">
+                    <span class="edit-label">Тегі</span>
+                    <input id="editSurname" class="edit-input" type="text" autocomplete="family-name" />
+                </label>
+                <label class="edit-field">
+                    <span class="edit-label">Email</span>
+                    <input id="editEmail" class="edit-input" type="email" autocomplete="email" />
+                </label>
+                <label class="edit-field">
+                    <span class="edit-label">Avatar</span>
+                    <input id="editAvatarUrl" class="edit-input" type="text" placeholder="Сілтеме (https://...) немесе ../assets/avatar1.jpg" />
+                </label>
+                <div class="avatar-picker" id="avatarPicker" aria-label="Avatar таңдау">
+                    <button type="button" class="avatar-pill avatar-pill-img" data-avatar="../assets/avatar1.jpg" title="avatar1">
+                        <img src="../assets/avatar1.jpg" alt="avatar1">
+                    </button>
+                    <button type="button" class="avatar-pill avatar-pill-img" data-avatar="../assets/avatar2.jpg" title="avatar2">
+                        <img src="../assets/avatar2.jpg" alt="avatar2">
+                    </button>
+                    <button type="button" class="avatar-pill avatar-pill-img" data-avatar="../assets/avatar3.jpg" title="avatar3">
+                        <img src="../assets/avatar3.jpg" alt="avatar3">
+                    </button>
+                    <button type="button" class="avatar-pill avatar-pill-img" data-avatar="../assets/avatar4.jpg" title="avatar4">
+                        <img src="../assets/avatar4.jpg" alt="avatar4">
+                    </button>
+                    <button type="button" class="avatar-pill avatar-pill-img" data-avatar="../assets/avatar5.jpg" title="avatar5">
+                        <img src="../assets/avatar5.jpg" alt="avatar5">
+                    </button>
+                    <button type="button" class="avatar-pill avatar-pill-img" data-avatar="../assets/avatar6.jpg" title="avatar6">
+                        <img src="../assets/avatar6.jpg" alt="avatar6">
+                    </button>
+                </div>
+                <div class="edit-actions">
+                    <button type="button" class="edit-secondary-btn" data-close="true">Болдырмау</button>
+                    <button type="submit" class="edit-primary-btn" id="editSaveBtn">Сақтау</button>
+                </div>
+                <p class="edit-hint" id="editHint"></p>
+            </form>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="../HomePage/home.html"><span class="material-symbols-outlined">home</span></a>
+        <a href="../QuizPage/quiz.html"><span class="material-symbols-outlined">quiz</span></a>
+        <a href="../aiChat/message.html"><span class="material-symbols-outlined">chat</span></a>
+        <a href="../HomePage/competition.html"><span class="material-symbols-outlined">emoji_events</span></a>
+        <a href="profile.html" class="active"><span class="material-symbols-outlined">person</span></a>
+    </nav>
+
+    <script type="module" src="profile.js"></script>
+</body>
+
+</html>

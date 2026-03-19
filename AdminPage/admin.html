@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+    <html lang="kk">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Админ панель</title>
+
+        <link
+            href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap)"
+            rel="stylesheet">
+        <link rel="stylesheet" href="admin.css">
+    </head>
+
+    <body>
+
+        <div class="admin-container">
+            <h1 class="admin-title">Админ Панель</h1>
+            <p class="admin-subtitle">Қажетті бөлімді таңдаңыз</p>
+
+            <div class="card-grid">
+                <!-- Сабақтар -->
+                <div class="admin-card" onclick="location.href='admin_lessons.html'">
+                    <div class="card-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h2>Сабақтар</h2>
+                    <p>Барлық сабақтарды басқару</p>
+                </div>
+
+                <!-- Тест сұрақтар -->
+                <div class="admin-card" onclick="location.href='admin_tests.html'">
+                    <div class="card-icon" style="background-color:#1E7F9A;">
+                        <i class="fas fa-list-ul"></i>
+                    </div>
+                    <h2>Тест сұрақтар</h2>
+                    <p>Барлық тесттерді қарау мен өзгерту</p>
+                </div>
+
+                <!-- Басты бет контенті -->
+                <div class="admin-card" onclick="location.href='admin_main.html'">
+                    <div class="card-icon" style="background-color:#95571E;">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h2>Басты бет</h2>
+                    <p>Мәтін мен суретті жаңарту</p>
+                </div>
+
+                <!-- Пайдаланушылар -->
+                <div class="admin-card" onclick="location.href='admin_users.html'">
+                    <div class="card-icon" style="background-color:#6C5CE7;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h2>Пайдаланушылар</h2>
+                    <p>Профильді көру және пайдаланушыны өшіру</p>
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js)"></script>
+
+    </body>
+
+    </html>

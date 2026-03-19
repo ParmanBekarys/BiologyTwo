@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ — Басты бет</title>
+  <link rel="stylesheet" href="admin_main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <a href="admin.html" class="back-to-admin" title="Админ бетке">
+    <img src="../assets/left.svg" alt="Артқа">
+  </a>
+
+  <div class="admin-container">
+    <h1 class="admin-title">Басты бет</h1>
+    <p class="admin-subtitle">Мәтін мен суретті жаңартыңыз</p>
+
+    <div class="adminPanel">
+      <form id="mainPageForm">
+        <label>Баннер тақырыбы</label>
+        <input type="text" id="bannerTitle" placeholder="Мысалы: БИОЛОГИЯ">
+
+        <label>Баннер сурет сілтемесі (URL)</label>
+        <input type="text" id="bannerImage" placeholder="https://... немесе ../assets/banner.jpg">
+
+        <button type="submit" id="saveBtn">Сақтау</button>
+      </form>
+      <p class="form-hint" id="formHint"></p>
+    </div>
+  </div>
+
+  <script type="module" src="admin_main.js"></script>
+</body>
+</html>

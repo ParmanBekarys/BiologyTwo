@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Navigation</title>
+    <link rel="stylesheet" href="home.css">
+    <!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+
+    <div class="nav">
+        <img class="image" id="navProfileImage" src="../assets/defaultAvatar.jpg" alt="profile">
+
+        <h3 class="name" id="userName">
+            Loading...
+        </h3>
+
+        <p class="score" id="userScore">
+            <i class="fas fa-fire-alt"></i> 0
+        </p>
+    </div>
+
+    <div class="banner">
+
+        <img class="imageBanner" id="bannerImage" src="https://i.pinimg.com/736x/cc/50/2e/cc502e931dc882369aa2027196369402.jpg"
+            alt="banner">
+
+        <div class="overlay"></div>
+
+        <h1 class="title" id="bannerTitle">БИОЛОГИЯ</h1>
+
+    </div>
+
+    <div class="lesson">
+        <h3 class="h3">Сабақтар</h3>
+
+        <div class="right">
+            <a href="allLessons.html" class="view-all">
+                <p class="p">толық қарау</p>
+                <svg class="rightWhite" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.29289 4.29289C8.68342 3.90237 9.31658 3.90237
+                9.70711 4.29289L16.7071 11.2929C17.0976 11.6834
+                17.0976 12.3166 16.7071 12.7071L9.70711 19.7071C9.31658
+                20.0976 8.68342 20.0976 8.29289 19.7071C7.90237
+                19.3166 7.90237 18.6834 8.29289 18.2929L14.5858
+                12L8.29289 5.70711C7.90237 5.31658 7.90237
+                4.68342 8.29289 4.29289Z" fill="#256C40"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+
+    <div id="lessons-container"></div>
+
+
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="active"><span class="material-symbols-outlined">home</span></a>
+        <a href="../QuizPage/quiz.html"><span class="material-symbols-outlined">quiz</span></a>
+        <a href="../aiChat/message.html"><span class="material-symbols-outlined">chat</span></a>
+        <a href="competition.html"><span class="material-symbols-outlined">emoji_events</span></a>
+        <a href="../ProfilePage/profile.html"><span class="material-symbols-outlined">person</span></a>
+    </nav>
+    <script type="module" src="home.js"></script>
+
+</body>
+
+</html>

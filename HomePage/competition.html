@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жарыс – Лидерлер</title>
+    <link rel="stylesheet" href="competition.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="leaders-wrapper">
+        <h1 class="leaders-title">Жарыс</h1>
+        <div class="leaders-tabs">
+            <button type="button" class="leaders-tab-btn" data-tab="friends">
+                <i class="fas fa-user-friends"></i> Достарым
+            </button>
+            <button type="button" class="leaders-tab-btn active" data-tab="all">
+                <i class="fas fa-users"></i> Барлығы
+            </button>
+        </div>
+        <div class="leaders-search-wrap">
+            <i class="fas fa-search"></i>
+            <input type="text" id="leadersSearch" class="leaders-search" placeholder="Аты бойынша іздеу...">
+            <button type="button" id="leadersSearchBtn" class="leaders-search-btn">Іздеу</button>
+        </div>
+        <div id="leaders-tab-friends" class="leaders-tab-content">
+            <div id="friends-list" class="leaders-list-container"></div>
+        </div>
+        <div id="leaders-tab-all" class="leaders-tab-content active">
+            <div id="all-list" class="leaders-list-container"></div>
+        </div>
+    </div>
+
+    <!-- Дос профилі модалы -->
+    <div id="friend-profile-modal" class="friend-modal hidden">
+        <div class="friend-modal-backdrop"></div>
+        <div class="friend-modal-card">
+            <button type="button" class="friend-modal-close" id="friendProfileClose">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="friend-avatar-wrap">
+                <img id="friendProfileAvatar" class="friend-avatar" src="../assets/defaultAvatar.jpg" alt="Профиль" data-default-src="../assets/defaultAvatar.jpg">
+            </div>
+            <h2 id="friendProfileName" class="friend-profile-name">Адам аты</h2>
+            <p id="friendProfileSubtitle" class="friend-profile-subtitle">email@example.com</p>
+
+            <div class="friend-stats-row">
+                <div class="friend-stat-item">
+                    <span id="friendProfilePoints" class="friend-stat-value">0</span>
+                    <span class="friend-stat-label">Үпай</span>
+                </div>
+                <div class="friend-stat-item">
+                    <span id="friendProfileFollowers" class="friend-stat-value">0</span>
+                    <span class="friend-stat-label">Followers</span>
+                </div>
+                <div class="friend-stat-item">
+                    <span id="friendProfileFollowing" class="friend-stat-value">0</span>
+                    <span class="friend-stat-label">Following</span>
+                </div>
+            </div>
+
+            <div class="friend-actions">
+                <button type="button" id="friendProfileBtn" class="friend-secondary-btn">Профильге өту</button>
+                <button type="button" id="friendActionBtn" class="friend-primary-btn">Дос болу</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html"><span class="material-symbols-outlined">home</span></a>
+        <a href="../QuizPage/quiz.html"><span class="material-symbols-outlined">quiz</span></a>
+        <a href="../aiChat/message.html"><span class="material-symbols-outlined">chat</span></a>
+        <a href="competition.html" class="active"><span class="material-symbols-outlined">emoji_events</span></a>
+        <a href="../ProfilePage/profile.html"><span class="material-symbols-outlined">person</span></a>
+    </nav>
+
+    <script type="module" src="competition.js"></script>
+</body>
+</html>

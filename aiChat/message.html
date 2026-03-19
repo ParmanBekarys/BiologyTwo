@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Chat</title>
+  <link rel="stylesheet" href="message.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-avatar">
+          <span class="material-symbols-outlined">auto_awesome</span>
+        </div>
+        <div class="chat-header-text">
+          <h2>AI Chat</h2>
+          <p>Биология сұрағыңызды жазыңыз</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+
+    <div class="chat-input">
+      <textarea id="userInput" rows="1" placeholder="Сұрағыңызды жазыңыз..." aria-label="Сұрақ енгізу"></textarea>
+      <button id="sendBtn" type="button">
+        <span class="material-symbols-outlined">send</span>
+        <span>Жіберу</span>
+      </button>
+    </div>
+
+    <div class="chat-hint" id="chatHint"></div>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Навигация">
+    <a href="../HomePage/home.html"><span class="material-symbols-outlined">home</span></a>
+    <a href="../QuizPage/quiz.html"><span class="material-symbols-outlined">quiz</span></a>
+    <a href="message.html" class="active"><span class="material-symbols-outlined">chat</span></a>
+    <a href="../HomePage/competition.html"><span class="material-symbols-outlined">emoji_events</span></a>
+    <a href="../ProfilePage/profile.html"><span class="material-symbols-outlined">person</span></a>
+  </nav>
+
+  <script src="config.js"></script>
+  <script type="module" src="message.js"></script>
+</body>
+</html>
+

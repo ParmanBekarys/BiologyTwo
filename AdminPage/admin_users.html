@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ — Пайдаланушылар</title>
+  <link rel="stylesheet" href="admin_users.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <a href="admin.html" class="back-to-admin" title="Админ бетке">
+    <img src="../assets/left.svg" alt="Артқа">
+  </a>
+
+  <div class="admin-users-container">
+    <h1 class="admin-users-title">Пайдаланушылар</h1>
+    <p class="admin-users-subtitle">Профильді көру немесе пайдаланушыны өшіру</p>
+
+    <div id="users-list" class="users-list"></div>
+    <p id="users-empty" class="users-empty hidden">Пайдаланушылар жоқ.</p>
+    <p id="users-error" class="users-error hidden"></p>
+  </div>
+
+  <div id="profile-modal" class="profile-modal hidden" aria-hidden="true">
+    <div class="profile-modal-backdrop" id="profileModalBackdrop"></div>
+    <div class="profile-modal-box">
+      <button type="button" class="profile-modal-close" id="profileModalClose" aria-label="Жабу">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <iframe id="profile-modal-iframe" class="profile-modal-iframe" title="Профиль"></iframe>
+    </div>
+  </div>
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <script type="module" src="admin_users.js"></script>
+</body>
+</html>

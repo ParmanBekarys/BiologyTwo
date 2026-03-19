@@ -1,0 +1,154 @@
+.adminPanel {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #0F4D0F;
+  border-radius: 15px;
+  background: #f5f5f5;
+}
+
+.adminPanel input, .adminPanel textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.adminPanel button {
+  padding: 10px 15px;
+  background: #0F4D0F;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f4f6f9;
+  color: #222;
+}
+
+.back-to-admin {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #256C40;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(37,108,64,0.35);
+  border: none;
+  color: #fff;
+  text-decoration: none;
+}
+
+.back-to-admin:hover {
+  background: #1e5733;
+}
+
+.back-to-admin img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+.admin-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.admin-title {
+  font-size: 28px;
+  color: #0F4D0F;
+  margin-bottom: 8px;
+}
+
+.admin-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.admin-card {
+  background-color: #fff;
+  border-radius: 14px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background-color: #0F4D0F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon i {
+  color: #fff;
+  font-size: 26px;
+}
+
+.admin-card h2 {
+  font-size: 20px;
+  margin: 10px 0 6px;
+  color: #222;
+}
+
+.admin-card p {
+  color: #555;
+  font-size: 14px;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .admin-title {
+    font-size: 24px;
+  }
+  .card-icon {
+    width: 54px;
+    height: 54px;
+  }
+  .card-icon i {
+    font-size: 23px;
+  }
+}

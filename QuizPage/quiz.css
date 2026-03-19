@@ -1,0 +1,1521 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Биология атмосферасы — homepage-пен бірдей */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 5px;
+    padding-bottom: 100px;
+    font-family: "Inter", sans-serif;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle at 20% 80%, rgba(46, 125, 50, 0.06) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(129, 199, 132, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body > * { position: relative; z-index: 1; }
+
+
+/* Курс карточкалары */
+.courses-row {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
+    margin-bottom: 20px;
+}
+
+.course-card {
+    min-width: 250px;
+    border-radius: 15px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    cursor: pointer;
+    scroll-snap-align: start;
+    border: 3px solid transparent;
+}
+
+.course-card.active {
+    border-color: #256C40;
+}
+
+.course-image {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.course-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.course-title {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    font-size: 18px;
+    z-index: 2;
+}
+
+.course-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+.progress-bar {
+    height: 6px;
+    background-color: #e0e0e0;
+    margin: 0 15px 15px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #256C40;
+    border-radius: 3px;
+    width: 25%;
+    /* По умолчанию */
+}
+
+/* Сабақтар тізімі */
+.lessons-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.lessons-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    color: #256C40;
+}
+
+.lessons-title i {
+    margin-right: 10px;
+}
+
+.lessons-subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.lesson-list {
+    display: none;
+    /* По умолчанию скрыто */
+}
+
+.lesson-list.active {
+    display: block;
+}
+
+.lesson-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-decoration: none;
+    color: #333;
+}
+
+.lesson-status {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 12px;
+    color: white;
+}
+
+.completed {
+    background-color: #256C40;
+}
+
+.in-progress {
+    background-color: #FF9800;
+}
+
+.not-started {
+    background-color: #9E9E9E;
+}
+
+.lesson-content {
+    flex: 1;
+}
+
+.lesson-title {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.lesson-duration {
+    font-size: 12px;
+    color: #666;
+}
+
+
+.bottom-nav {
+    position: fixed;
+    bottom: 12px;
+    width: 88%;
+    height: 64px;
+    max-width: 420px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(15, 77, 15, 0.15);
+    border-radius: 20px;
+    border: 1px solid rgba(15, 77, 15, 0.08);
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: #256C40;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+
+.bottom-nav a:hover {
+    color: #256C40;
+}
+
+.bottom-nav a.active {
+    color: #256C40;
+    font-weight: 600;
+}
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 197px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.2;
+}
+
+.title {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.backButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 3;
+    transform: rotate(180deg);
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0px;
+}
+
+.lazyColumnLesson {
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 12px;
+    align-items: center;
+    background: white;
+    box-shadow: 0 10px 22px rgba(20, 50, 36, 0.10);
+    border: 1px solid rgba(37, 108, 64, 0.08);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.lazyColumnLesson:hover {
+    box-shadow: 0 14px 30px rgba(20, 50, 36, 0.14);
+    transform: translateY(-2px);
+}
+
+.lessonImage {
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.lessonImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lessonTitle {
+    text-align: left;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.lessonTitle h2 {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+.lessonTitle p {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    margin: 2px 0 0 0;
+    color: #256C40;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.lessonButton {
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+}
+
+.startButton {
+    font-family: "Inter", sans-serif;
+    margin: 2px 0;
+    background: #256C40;
+    font-size: 12px;
+    border: none;
+    color: white;
+    padding: 8px 25px;
+    text-decoration: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+}
+
+/* Таб батырмалары - Сабақ тесттері / Қиын тесттер */
+.quiz-tabs {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background: white;
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.quiz-tab-btn {
+    flex: 1;
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
+    background: #f8f8f8;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+.quiz-tab-btn:hover {
+    border-color: #256C40;
+    color: #256C40;
+    background: rgba(15, 77, 15, 0.05);
+}
+.quiz-tab-btn.active {
+    background: #256C40;
+    border-color: #256C40;
+    color: white;
+}
+.quiz-tab-content {
+    display: none;
+    padding: 15px;
+}
+.quiz-tab-content.active {
+    display: block;
+}
+
+/* Тест табтар - Сабақ / Қиын тесттер */
+.quiz-tabs {
+    display: flex;
+    gap: 0;
+    margin: 15px;
+    background: #e8e8e8;
+    border-radius: 14px;
+    padding: 4px;
+}
+.quiz-tab-btn {
+    flex: 1;
+    padding: 14px 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+.quiz-tab-btn:hover {
+    color: #256C40;
+}
+.quiz-tab-btn.active {
+    background: white;
+    color: #256C40;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.quiz-tab-content {
+    display: none;
+    padding: 15px;
+}
+.quiz-tab-content.active {
+    display: block;
+}
+
+/* Таб батырмалары - Сабақ тесттері / Қиын тесттер */
+.quiz-tabs {
+  display: flex;
+  gap: 0;
+  margin: 15px;
+  background: #e8e8e8;
+  border-radius: 14px;
+  padding: 4px;
+}
+.quiz-tab-btn {
+  flex: 1;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s;
+}
+.quiz-tab-btn:hover {
+  color: #0F4D0F;
+}
+.quiz-tab-btn.active {
+  background: white;
+  color: #256C40;
+  box-shadow: 0 2px 8№px rgba(0,0,0,0.08);
+}
+.quiz-tab-content {
+  display: none;
+  padding: 0 15px 20px;
+}
+.quiz-tab-content.active {
+  display: block;
+}
+
+/* Таб батырмалары - биология темасы */
+.quiz-tabs {
+  display: flex;
+  gap: 0;
+  margin: 15px;
+  margin-bottom: 0;
+  padding: 4px;
+  background: rgba(46, 125, 50, 0.15);
+  border-radius: 14px;
+}
+.quiz-tab-btn {
+  flex: 1;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  color: #1b5e20;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+.quiz-tab-btn:hover {
+  background: rgba(255,255,255,0.6);
+  color: #0F4D0F;
+}
+.quiz-tab-btn.active {
+  background: white;
+  color: #256C40;
+  box-shadow: 0 2px 12px rgba(15, 77, 15, 0.2);
+}
+.quiz-tab-content {
+  display: none;
+  padding: 15px;
+}
+.quiz-tab-content.active {
+  display: block;
+}
+
+/* Секция тақырыптары */
+.quiz-section {
+    margin-bottom: 30px;
+}
+
+.quiz-section-title {
+    font-size: 18px;
+    color: #256C40;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quiz-section-title i {
+    font-size: 22px;
+}
+
+/* Тест таймеры */
+.quiz-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #256C40;
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.quiz-timer.timer-warning {
+    background: #c0392b;
+}
+
+/* Секциялар */
+.quiz-section {
+  margin-bottom: 24px;
+}
+
+.quiz-section-title {
+  font-size: 18px;
+  color: #256C40;
+  margin-bottom: 12px;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quiz-section-title i {
+  font-size: 20px;
+}
+
+/* Таймер */
+.quiz-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #256C40;
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.quiz-timer.timer-warning {
+  background: #c0392b;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.8; }
+}
+
+/* Секциялар - Сабақ тесттері / Қиын тесттер */
+.quiz-section {
+  margin-bottom: 30px;
+}
+.quiz-section-title {
+  font-size: 18px;
+  color: #256C40;
+  margin: 0 15px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-section-title i {
+  font-size: 22px;
+}
+
+/* Таймер */
+.quiz-timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: #256C40;
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 18px;
+}
+.quiz-timer.timer-warning {
+  background: #c0392b;
+}
+
+/* Секциялар және таймер */
+.quiz-section {
+  margin-bottom: 30px;
+}
+
+.quiz-section-title {
+  font-size: 20px;
+  color: #256C40;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quiz-timer {
+  background: #256C40;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quiz-timer.timer-warning {
+  background: #c0392b;
+}
+
+/* Секциялар */
+.quiz-section {
+  margin-bottom: 30px;
+}
+.quiz-section-title {
+  font-size: 20px;
+  color: #256C40;
+  margin-bottom: 15px;
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.quiz-section-title i {
+  font-size: 22px;
+}
+.quiz-timer {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #256C40;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: rgba(15, 77, 15, 0.1);
+  border-radius: 12px;
+}
+.quiz-timer.timer-warning {
+  color: #c0392b;
+  background: rgba(192, 57, 43, 0.1);
+}
+
+/* Тест сұрақтары - admin_lessons дизайны */
+#test-view {
+    padding: 0px;
+    padding-top: 60px;
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.quiz-back-link {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+    color: #256C40;
+}
+
+.test-title {
+    text-align: center;
+    color: #1b5e20;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.questions-container {
+    min-height: 200px;
+}
+
+.question-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    /* box-shadow: 0 4px 20px rgba(15, 77, 15, 0.12); */
+    box-shadow: 0 12px 26px rgba(20, 50, 36, 0.10);
+    border: 1px solid rgba(37, 108, 64, 0.08);
+}
+
+.question-number {
+    color: #256C40;
+    opacity: 0.8;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.question-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.option-btn:hover {
+    border-color: #256C40;
+    background: rgba(15, 77, 15, 0.05);
+}
+
+.option-letter {
+    width: 32px;
+    height: 32px;
+    background: #256C40;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 12px;
+}
+
+.option-text {
+    flex: 1;
+}
+
+.no-questions {
+    text-align: center;
+    color: #666;
+    padding: 40px 20px;
+}
+
+.quiz-result-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.quiz-result-card h3 {
+    color: #256C40;
+    margin-bottom: 15px;
+}
+
+.result-score {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.result-percent {
+    font-size: 18px;
+    color: #256C40;
+    margin-bottom: 20px;
+}
+
+.quiz-result-card .startButton {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Тест өтілді badge + үпай алуға болады */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #4CAF50;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+.quiz-max-points {
+    font-size: 13px;
+    color: #FFD700 !important;
+    margin-top: 4px;
+}
+
+/* Қиын тест нәтижесі - от иконка + үпай */
+.quiz-result-standalone {
+    padding: 40px 24px !important;
+}
+.quiz-result-fire {
+    font-size: 64px;
+    color: #FFD700;
+    margin-bottom: 16px;
+}
+.quiz-result-fire i {
+    display: block;
+}
+.quiz-result-title {
+    font-size: 22px !important;
+    margin-bottom: 12px !important;
+}
+.result-points-earned {
+    font-size: 24px;
+    font-weight: bold;
+    color: #256C40;
+    background: rgba(255, 215, 0, 0.12);
+    padding: 10px 20px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 16px 0;
+}
+
+.result-points-earned .fa-fire-alt{
+    color: #ff6b35;
+    font-size: 20px;
+}
+
+/* Қиын тест - өтілді badge және үпай */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #27ae60;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+.quiz-max-points {
+    color: #ffc107 !important;
+    font-size: 13px !important;
+    margin-top: 4px !important;
+    font-weight: 600 !important;
+}
+
+/* Нәтиже беті - ұпай және от иконкасы */
+.quiz-result-standalone {
+    padding: 40px 24px !important;
+}
+.quiz-result-fire {
+    font-size: 64px;
+    color: #ffc107;
+    margin-bottom: 16px;
+}
+.quiz-result-fire i {
+    text-shadow: 0 0 20px rgba(255, 193, 7, 0.5);
+}
+.quiz-result-title {
+    font-size: 24px !important;
+    margin-bottom: 12px !important;
+}
+.result-points-earned {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #ffc107 !important;
+    margin: 16px 0 !important;
+}
+
+/* Тест өтілді badge */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #27ae60;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+
+/* Үпай алуға болады */
+.quiz-max-points {
+    color: #ffc107 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin-top: 4px !important;
+}
+
+/* Қиын тест нәтижесі - от иконка, сары */
+.quiz-result-standalone .quiz-result-fire {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+}
+.quiz-result-standalone .quiz-result-fire i {
+    font-size: 40px;
+    color: white;
+}
+.quiz-result-standalone .quiz-result-title {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+.result-points-earned {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #ff9800 !important;
+    margin: 16px 0 !important;
+}
+
+/* Қиын тест — тапсырылған белгісі */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #27ae60;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+
+/* Тест карточкасындағы үпай ақпары */
+.quiz-max-points {
+    font-size: 13px;
+    color: #ffc107 !important;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+/* Нәтиже беті — қиын тест */
+.quiz-result-standalone .quiz-result-fire {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quiz-result-standalone .quiz-result-fire i {
+    font-size: 48px;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.quiz-result-standalone {
+    padding: 40px 24px !important;
+}
+.quiz-result-standalone .quiz-result-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+.quiz-result-standalone .result-points-earned {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffc107 !important;
+    margin: 16px 0 24px;
+    background: rgba(255, 193, 7, 0.15);
+    padding: 12px 24px;
+    border-radius: 16px;
+}
+
+/* Тест карточкасы — өтілді белгісі және үпай */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #27ae60;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+.quiz-max-points {
+    font-size: 13px;
+    color: #ffd93d !important;
+    margin-top: 4px;
+}
+
+/* Қиын тест нәтижесі — от иконка, жеңілген үпай */
+.quiz-result-standalone {
+    padding: 40px 24px !important;
+}
+.quiz-result-fire {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #ffd93d 0%, #ff9500 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(255, 149, 0, 0.4);
+}
+.quiz-result-fire i {
+    font-size: 42px;
+    color: white;
+}
+.quiz-result-title {
+    font-size: 22px !important;
+    margin-bottom: 12px !important;
+}
+.result-points-earned {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ff9500;
+    margin: 16px 0 24px;
+}
+
+/* Тест карточкасы - өтілді белгісі */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #27ae60;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+
+/* Макс үпай карточкада */
+.quiz-max-points {
+    font-size: 13px;
+    color: #ffd93d !important;
+    margin-top: 4px;
+}
+
+/* Нәтиже беті - қиын тест */
+.quiz-result-standalone {
+    padding: 40px 24px !important;
+}
+.quiz-result-fire {
+    font-size: 64px;
+    color: #f1c40f;
+    margin-bottom: 16px;
+}
+.quiz-result-title {
+    font-size: 24px !important;
+    margin-bottom: 12px !important;
+}
+.result-points-earned {
+    font-size: 28px;
+    font-weight: 700;
+    color: #f1c40f;
+    margin: 16px 0 24px;
+    background: rgba(241, 196, 15, 0.15);
+    padding: 12px 24px;
+    border-radius: 16px;
+}
+
+/* Тест өтілді белгісі */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #27ae60;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+
+/* Максималды үпай на карточке */
+.quiz-max-points {
+    font-size: 13px !important;
+    color: #FFD700 !important;
+    margin-top: 4px !important;
+}
+
+/* Нәтиже беті — қиын тест */
+.quiz-result-standalone {
+    padding: 40px 24px !important;
+}
+.quiz-result-fire {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    animation: firePulse 2s ease-in-out infinite;
+}
+.quiz-result-fire i {
+    font-size: 42px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+@keyframes firePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+.result-points-earned {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #FFD700 !important;
+    margin: 15px 0 20px !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.quiz-result-standalone .quiz-result-title {
+    font-size: 22px;
+}
+
+/* Тест карточкасы - Өтілді белгісі және үпай */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #27ae60;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+.quiz-max-points {
+    font-size: 13px;
+    color: #ffc107 !important;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+/* Қиын тест нәтижесі - от иконкасы сары */
+.quiz-result-standalone .quiz-result-fire {
+    font-size: 72px;
+    color: #ffc107;
+    margin-bottom: 16px;
+}
+.quiz-result-standalone .quiz-result-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+.quiz-result-standalone .result-points-earned {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffc107;
+    background: rgba(255, 193, 7, 0.15);
+    padding: 12px 24px;
+    border-radius: 16px;
+    display: inline-block;
+    margin: 12px 0;
+}
+
+/* Тест картасы - өтілді белгісі және үпай */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #FFD700;
+    color: #1a1a2e;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+.quiz-max-points {
+    font-size: 13px;
+    color: #FFD700 !important;
+    margin-top: 4px !important;
+}
+
+/* Қиын тест нәтижесі - от иконка, жеңілген үпай */
+.quiz-result-standalone .quiz-result-fire {
+    font-size: 72px;
+    color: #FFD700;
+    margin-bottom: 16px;
+}
+.quiz-result-standalone .quiz-result-title {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+.quiz-result-standalone .result-score {
+    font-size: 28px;
+}
+.quiz-result-standalone .result-points-earned {
+    font-size: 26px;
+    font-weight: bold;
+    color: #FFD700;
+    background: rgba(255, 215, 0, 0.15);
+    padding: 12px 24px;
+    border-radius: 16px;
+    display: inline-block;
+    margin: 12px 0;
+}
+
+/* Өтілді badge - тест тапсырылған белгісі */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #FFD700;
+    color: #1a1a2e;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+
+/* Тест карточкасында мүмкін болатын үпайлар */
+.quiz-max-points {
+    font-size: 13px;
+    color: #FFD700 !important;
+    margin-top: 4px;
+}
+
+/* Нәтиже беті - от иконкасы ортада, сары */
+.quiz-result-standalone .quiz-result-fire {
+    font-size: 64px;
+    color: #FFD700;
+    margin-bottom: 16px;
+    text-align: center;
+}
+.quiz-result-standalone .quiz-result-fire i {
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+}
+.quiz-result-standalone .quiz-result-title {
+    font-size: 24px;
+    color: #0F4D0F;
+    margin-bottom: 12px;
+}
+.quiz-result-standalone .result-score {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.quiz-result-standalone .result-percent {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.result-points-earned {
+    font-size: 26px;
+    font-weight: bold;
+    color: #FFD700;
+    background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,180,0,0.3));
+    padding: 12px 24px;
+    border-radius: 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Өтілді badge - тест тапсырылған белгісі */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #FFD700;
+    color: #1a1a2e;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+
+/* Тест карточкасындағы мүмкін болатын үпайлар */
+.quiz-max-points {
+    font-size: 13px;
+    color: #FFD700 !important;
+    margin: 4px 0 8px 0 !important;
+    font-weight: 600;
+}
+
+/* Нәтиже беті - от иконкасы ортада, сары */
+.quiz-result-standalone .quiz-result-fire {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(255, 165, 0, 0.5);
+    animation: fireGlow 1.5s ease-in-out infinite alternate;
+}
+@keyframes fireGlow {
+    from { box-shadow: 0 8px 25px rgba(255, 165, 0, 0.5); transform: scale(1); }
+    to { box-shadow: 0 12px 35px rgba(255, 215, 0, 0.7); transform: scale(1.05); }
+}
+
+.quiz-result-standalone {
+    padding: 35px 25px !important;
+    border-radius: 24px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important;
+}
+
+.quiz-result-standalone .quiz-result-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.quiz-result-standalone .result-score {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.quiz-result-standalone .result-percent {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Жеңілген үпай - керемет көрініс */
+.result-points-earned {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1a1a2e !important;
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    padding: 12px 24px;
+    border-radius: 16px;
+    margin: 15px 0 25px !important;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4);
+    animation: pointsPulse 1s ease-in-out;
+}
+@keyframes pointsPulse {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Өтілді белгісі - тест карточкасында */
+.quiz-completed-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(76, 175, 80, 0.95);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+.quiz-completed-badge i {
+    font-size: 14px;
+}
+
+/* Тестте алуға болатын үпайлар */
+.quiz-max-points {
+    font-size: 13px;
+    color: #FFC107 !important;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+/* Қиын тест нәтижесі - жақсартылған дизайн */
+.quiz-result-standalone .quiz-result-fire {
+    font-size: 72px;
+    color: #FFC107;
+    margin-bottom: 16px;
+    text-shadow: 0 0 30px rgba(255, 193, 7, 0.5);
+}
+.quiz-result-standalone .quiz-result-title {
+    font-size: 24px;
+    color: #0F4D0F;
+    margin-bottom: 12px;
+}
+.quiz-result-standalone .result-score {
+    font-size: 20px;
+    color: #333;
+}
+.quiz-result-standalone .result-percent {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+.result-points-earned {
+    font-size: 28px !important;
+    font-weight: 700;
+    color: #FFC107 !important;
+    margin: 12px 0 20px !important;
+    text-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+}

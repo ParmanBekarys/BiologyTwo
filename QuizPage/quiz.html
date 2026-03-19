@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Барлық сабақтар</title>
+    <link rel="stylesheet" href="quiz.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+        integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+        crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</head>
+
+<body>
+
+
+    <!-- Сабақтар мен тесттер тізімі -->
+    <div id="lessons-view">
+        <div class="quiz-tabs">
+            <button type="button" class="quiz-tab-btn active" data-tab="lessons">
+                <i class="fas fa-book"></i> Сабақ тесттері
+            </button>
+            <button type="button" class="quiz-tab-btn" data-tab="standalone">
+                <i class="fas fa-fire-alt"></i> Қиын тесттер
+            </button>
+        </div>
+        <div id="quiz-tab-lessons" class="quiz-tab-content active">
+            <div id="lessons-container" class="lessons-grid"></div>
+        </div>
+        <div id="quiz-tab-standalone" class="quiz-tab-content">
+            <div id="standalone-tests-container" class="lessons-grid"></div>
+        </div>
+    </div>
+
+    <!-- Тест сұрақтары -->
+    <div id="test-view" style="display:none;">
+        <a href="quiz.html" class="quiz-back-link">
+            <img src="../assets/left.svg" alt="Артқа" style="width:24px;height:24px;">
+        </a>
+        <h2 id="test-title" class="test-title"></h2>
+        <div id="questions-container" class="questions-container"></div>
+        <div id="quiz-result" class="quiz-result" style="display:none;"></div>
+    </div>
+
+    <nav class="bottom-nav">
+
+        <a href="../HomePage/home.html"><span class="material-symbols-outlined">home</span></a>
+        <a href="quiz.html" class="active"><span class="material-symbols-outlined">quiz</span></a>
+        <a href="../aiChat/message.html"><span class="material-symbols-outlined">chat</span></a>
+        <a href="../HomePage/competition.html"><span class="material-symbols-outlined">emoji_events</span></a>
+        <a href="../ProfilePage/profile.html"><span class="material-symbols-outlined">person</span></a>
+
+    </nav>
+
+    <script type="module" src="quiz.js"></script>
+
+</body>
+
+</html>

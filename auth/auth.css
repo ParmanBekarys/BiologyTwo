@@ -1,0 +1,212 @@
+:root {
+    --accent: #256c40;
+    --accent-strong: #1c5130;
+    --surface: #ffffff;
+    --surface-soft: #f3f8f4;
+    --text: #143224;
+    --muted: #6b7a72;
+    --danger: #b3261e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+        radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.18) 0, transparent 34%),
+        radial-gradient(circle at 90% 88%, rgba(255, 255, 255, 0.12) 0, transparent 32%),
+        linear-gradient(140deg, #103a24 0%, #1a6b40 52%, #0c2d1d 100%);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 26px 56px rgba(8, 26, 16, 0.35);
+}
+
+.auth-header {
+    padding: 30px 28px 24px;
+    color: #fff;
+    text-align: center;
+    background:
+        linear-gradient(160deg, rgba(37, 108, 64, 0.95), rgba(20, 50, 36, 0.95)),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.24) 0, transparent 40%);
+}
+
+.auth-logo {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.17);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(4px);
+}
+
+.auth-logo svg {
+    width: 34px;
+    height: 34px;
+    color: #fff;
+}
+
+.auth-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+}
+
+.auth-header p {
+    font-size: 14px;
+    opacity: 0.92;
+}
+
+.auth-body {
+    padding: 30px 28px 24px;
+    background: var(--surface);
+}
+
+.auth-body h2 {
+    text-align: center;
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 22px;
+}
+
+.auth-form .input-group {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.auth-form .input-group input {
+    width: 100%;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid #d4ded8;
+    background: var(--surface-soft);
+    padding: 18px 14px 0;
+    outline: none;
+    font-size: 15px;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.auth-form .input-group input:focus {
+    border-color: rgba(37, 108, 64, 0.65);
+    box-shadow: 0 0 0 4px rgba(37, 108, 64, 0.14);
+    background: #fff;
+}
+
+.auth-form .input-group label {
+    position: absolute;
+    top: 17px;
+    left: 14px;
+    font-size: 14px;
+    color: var(--muted);
+    pointer-events: none;
+    transition: all 0.18s ease;
+}
+
+.auth-form .input-group input:focus + label,
+.auth-form .input-group input:not(:placeholder-shown) + label {
+    top: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+}
+
+.auth-form .input-group input::placeholder {
+    color: transparent;
+}
+
+.auth-btn {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 14px;
+    margin-top: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+.auth-btn:hover {
+    filter: brightness(1.06);
+}
+
+.auth-btn:active {
+    transform: translateY(1px);
+}
+
+#message {
+    margin-top: 14px;
+    min-height: 20px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#message.success {
+    color: var(--accent);
+}
+
+#message.error {
+    color: var(--danger);
+}
+
+.auth-footer {
+    padding: 18px 28px 24px;
+    text-align: center;
+    border-top: 1px solid #edf2ee;
+    background: #fbfdfb;
+}
+
+.auth-footer .footer-text {
+    color: var(--muted);
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.auth-footer a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 14px;
+    }
+
+    .auth-body,
+    .auth-header,
+    .auth-footer {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}

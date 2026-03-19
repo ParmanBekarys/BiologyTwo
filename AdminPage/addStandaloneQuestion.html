@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Қиын тестке сұрақ қосу</title>
+  <link rel="stylesheet" href="addLesson.css">
+</head>
+
+<body>
+
+  <a href="admin_tests_standalone.html" class="back-to-admin" title="Тест тізіміне">
+    <img src="../assets/left.svg" alt="Артқа">
+  </a>
+
+  <div class="adminPanel">
+    <h2>Қиын сұрақ қосу</h2>
+
+    <label>Сұрақ мәтіні</label>
+    <textarea id="questionText" placeholder="Қиын сұрақты осында жазыңыз"></textarea>
+
+    <label>Вариант 1</label>
+    <input type="text" id="option1" placeholder="Бірінші жауап">
+
+    <label>Вариант 2</label>
+    <input type="text" id="option2" placeholder="Екінші жауап">
+
+    <label>Вариант 3</label>
+    <input type="text" id="option3" placeholder="Үшінші жауап">
+
+    <label>Вариант 4</label>
+    <input type="text" id="option4" placeholder="Төртінші жауап">
+
+    <label>Дұрыс жауап (1, 2, 3 немесе 4)</label>
+    <input type="number" id="correctOption" min="1" max="4" placeholder="1">
+
+    <button id="addQuestionButton">Сұрақты қосу</button>
+  </div>
+
+  <script type="module" src="addStandaloneQuestion.js"></script>
+</body>
+
+</html>

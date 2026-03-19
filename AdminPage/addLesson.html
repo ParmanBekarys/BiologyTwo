@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="addLesson.css">
+    <link rel="icon" href="../assets/profile.jpg">
+</head>
+
+<body>
+
+    <a href="admin_lessons.html" class="back-to-admin" title="Сабақтар тізіміне">
+        <img src="../assets/left.svg" alt="Артқа">
+    </a>
+
+    <div class="adminPanel">
+
+        <h2>Жаңа сабақ қосу</h2>
+
+        <label>Сабақ атауы</label>
+        <input type="text" id="lessonTitle" placeholder="Анатомия">
+
+        <label>Уақыты</label>
+        <input type="text" id="lessonTime" placeholder="28 минут">
+
+        <label>Сұрақ саны</label>
+        <input type="number" id="lessonQuestions" placeholder="18">
+
+        <label>Видео сілтеме</label>
+        <input type="text" id="lessonVideo" placeholder="https://youtube.com/...">
+
+        <label>Конспект</label>
+        <textarea id="lessonConspect" placeholder="Конспект текстін осында жазыңыз"></textarea>
+
+        <label>Сабақ суреті</label>
+        <input type="text" id="lessonImage" placeholder="Сурет URL">
+
+        <button id="addLessonButton">Сабақты қосу</button>
+
+    </div>
+
+    <script type="module" src="admin.js"></script>
+
+</body>
+
+</html>

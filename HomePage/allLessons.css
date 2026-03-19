@@ -1,0 +1,127 @@
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 197px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+lessons-container {
+    padding: 5px;
+    margin: 0 auto;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.2;
+}
+
+.title {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.backButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 3;
+    transform: rotate(180deg);
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 5px;
+}
+
+.lazyColumnLesson {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 0px;
+    align-items: center;
+    background: white;
+    box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.25);
+}
+
+.lessonImage {
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.lessonImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.lessonTitle {
+    text-align: left;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.lessonTitle h2 {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+.lessonTitle p {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    margin: 2px 0 0 0;
+    color: #0F4D0F;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.lessonButton {
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    
+}
+
+.startButton {
+    font-family: "Inter", sans-serif;
+    margin: 2px 0;
+    background: #0F4D0F;
+    font-size: 12px;
+    border: none;
+    color: white;
+    padding: 8px 25px;
+    text-decoration: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+}
