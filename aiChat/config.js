@@ -1,5 +1,5 @@
 const LOCAL_API_BASE_URL = "http://localhost:3000";
-const PROD_API_BASE_URL = "https://biologytwo.onrender.com";
+const PROD_API_BASE_URL = "https://biologytwo-1.onrender.com";
 
 const isLocalHost =
   window.location.hostname === "localhost" ||
