@@ -42,52 +42,38 @@ function mapRoleForGemini(role) {
 }
 
 async function getAiResponseStub(userText) {
-  // Gemini key: конфигте GEMINI_API_KEY болса — соны, жоқ болса — бұрынғы OPENAI_API_KEY-ті қолданамыз.
-  const apiKey = globalThis.CONFIG?.GEMINI_API_KEY || globalThis.CONFIG?.OPENAI_API_KEY;
-  if (!apiKey) throw new Error("API key табылмады. aiChat/config.js ішіне Gemini кілтін қосыңыз.");
-
-  const model =
-    globalThis.CONFIG?.GEMINI_MODEL ||
-    "gemini-3-flash-preview";
-
-  // Gemini raw endpoint
-  // https://ai.google.dev/gemini-api/docs/quickstart  (generateContent v1beta)
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(
-    model
-  )}:generateContent`;
-
-  // contents: history + current userText
-  const nextHistory = [...conversationHistory, { role: "user", content: userText }];
-  const contents = nextHistory.map((m, idx) => {
-    const text =
-      idx === 0 && m.role === "user" ? `${SYSTEM_PROMPT}\n\n${m.content}` : m.content;
-    return {
-      role: mapRoleForGemini(m.role),
-      parts: [{ text }],
-    };
-  });
+  // API браузерде ашылмауы үшін Gemini сұрағын backend(proxy) арқылы жасаймыз.
+  const apiBaseUrl = globalThis.CONFIG?.API_BASE_URL || "http://localhost:3000";
+  const url = `${apiBaseUrl.replace(/\/$/, "")}/api/gemini`;
 
   const response = await fetch(url, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-goog-api-key": apiKey,
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      contents,
-      generationConfig: { temperature: 0.4 },
+      userText,
+      history: conversationHistory,
     }),
   });
 
   if (!response.ok) {
-    const errText = await response.text().catch(() => "");
-    throw new Error(`Gemini API error ${response.status}: ${errText || "no body"}`);
+    let errText = "";
+    try {
+      errText = await response.text();
+    } catch {}
+    const error = new Error(
+      `Gemini proxy error ${response.status}: ${errText || "no body"}`
+    );
+    error.status = response.status;
+    error.details = errText || "";
+    throw error;
   }
 
-  const data = await response.json();
-  const aiText =
-    data?.candidates?.[0]?.content?.parts?.map((p) => p?.text || "").join("")?.trim() ||
-    "Жауап келмеді.";
+  let data = null;
+  try {
+    data = await response.json();
+  } catch {}
+
+  const aiText = data?.text?.trim() || "Жауап келмеді.";
 
   conversationHistory.push({ role: "assistant", content: aiText });
   if (conversationHistory.length > 10) {
@@ -114,7 +100,13 @@ async function handleSend() {
   } catch (e) {
     console.error(e);
     chatMessagesEl.removeChild(typingEl);
-    addMessage("Қате болды. Кейінірек қайталап көріңіз.", "ai");
+    const status = e?.status;
+    const details = e?.details || e?.message || "";
+
+    addMessage(
+      `AI қате болды (${status || "?"}). Кейінірек қайталап көріңіз.`,
+      "ai"
+    );
   }
 }
 
