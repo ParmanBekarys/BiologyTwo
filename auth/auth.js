@@ -20,14 +20,26 @@ form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
+    const loginValue = (email.value || "").trim();
+    const passValue = (password.value || "").trim();
+
+    /**
+     * Қолданбалық админ кіруі (login коллекциясына юзер қоспайды).
+     * Ескерту: креденциалдар клиентте — тек оқу/демо үшін; продта қауіпті.
+     */
+    if (loginValue.toLowerCase() === "admin" && passValue === "admin123") {
+        localStorage.setItem("biologysmartAdminLocal", "1");
+        localStorage.removeItem("userId");
+        setMessage("Кіру сәтті!", "success");
+        window.location.href = "../AdminPage/admin.html";
+        return;
+    }
+
     const querySnapshot = await getDocs(collection(db, "login"));
 
     let foundUser = false;
     let userId = null;
     let isAdmin = false;
-
-    const loginValue = (email.value || "").trim();
-    const passValue = (password.value || "").trim();
 
     querySnapshot.forEach((doc) => {
         const data = doc.data();
@@ -49,6 +61,7 @@ form.addEventListener("submit", async (e) => {
     });
 
     if (foundUser) {
+        localStorage.removeItem("biologysmartAdminLocal");
         localStorage.setItem("userId", userId);
         setMessage("Кіру сәтті!", "success");
         if (isAdmin) {
