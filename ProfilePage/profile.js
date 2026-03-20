@@ -24,7 +24,6 @@ const profileMenu = document.getElementById("profileMenu");
 const logoutBtn = document.getElementById("logoutBtn");
 const editBtn = document.getElementById("editBtn");
 const shareBtn = document.getElementById("shareBtn");
-const tabs = document.querySelectorAll(".tab");
 
 const editModal = document.getElementById("editProfileModal");
 const editClose = document.getElementById("editProfileClose");
@@ -37,8 +36,6 @@ const avatarPicker = document.getElementById("avatarPicker");
 const editHint = document.getElementById("editHint");
 const editSaveBtn = document.getElementById("editSaveBtn");
 const achievementsGrid = document.getElementById("achievementsGrid");
-const achievementsPanel = document.getElementById("achievementsPanel");
-const aboutPanel = document.getElementById("aboutPanel");
 
 const ACHIEVEMENTS = [
     { id: "score50", requiredPoints: 50, image: "../assets/score50.jpg", title: "50 ұпай" },
@@ -137,25 +134,6 @@ function closeEditModal() {
         editModal.setAttribute("aria-hidden", "true");
     });
 }
-
-tabs.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        tabs.forEach((b) => {
-            b.classList.remove("active");
-            b.setAttribute("aria-selected", "false");
-        });
-        btn.classList.add("active");
-        btn.setAttribute("aria-selected", "true");
-        const tab = btn.dataset.tab;
-        if (tab === "achievements" && achievementsPanel && aboutPanel) {
-            achievementsPanel.classList.remove("hidden");
-            aboutPanel.classList.add("hidden");
-        } else if (tab === "about" && achievementsPanel && aboutPanel) {
-            achievementsPanel.classList.add("hidden");
-            aboutPanel.classList.remove("hidden");
-        }
-    });
-});
 
 if (editBtn) {
     editBtn.addEventListener("click", () => {

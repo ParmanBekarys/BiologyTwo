@@ -5,6 +5,7 @@
     height: 197px;
     overflow: hidden;
     border-radius: 15px;
+
 }
 
 lessons-container {
@@ -60,10 +61,11 @@ lessons-container {
     display: flex;
     flex-direction: column;
     border-radius: 15px;
-    padding: 0px;
+    padding: 5px;
     align-items: center;
     background: white;
     box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
 }
 
 .lessonImage {
@@ -87,7 +89,7 @@ lessons-container {
 
 .lessonTitle h2 {
     font-family: "Inter", sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     margin: 0;
 }
 
