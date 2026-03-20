@@ -4,32 +4,50 @@ require("dotenv").config();
 
 const app = express();
 
-const allowedOrigins = (
-  process.env.ALLOWED_ORIGINS ||
-  [
-    "http://localhost:5503",
-    "http://127.0.0.1:5503",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://biologysmart.parmanbekaris.workers.dev",
-    "https://biologysmart.org",
-    "https://www.biologysmart.org",
-  ].join(",")
-)
+/** Origin header-де соңғы / болмайды, бірақ қауіпсіздік үшін нормализация */
+function normalizeOrigin(origin) {
+  if (!origin || typeof origin !== "string") return origin;
+  return origin.trim().replace(/\/+$/, "");
+}
+
+/** Render-дағы ALLOWED_ORIGINS тек қосымша тізім; базалық домендер әрқашан қалады */
+const BASE_ALLOWED_ORIGINS = [
+  "http://localhost:5503",
+  "http://127.0.0.1:5503",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "https://biologysmart.parmanbekaris.workers.dev",
+  "https://biologysmart.org",
+  "https://www.biologysmart.org",
+];
+
+const extraFromEnv = (process.env.ALLOWED_ORIGINS || "")
   .split(",")
-  .map((origin) => origin.trim())
+  .map((o) => normalizeOrigin(o))
   .filter(Boolean);
+
+const allowedOriginsSet = new Set([
+  ...BASE_ALLOWED_ORIGINS.map(normalizeOrigin),
+  ...extraFromEnv,
+]);
 
 const corsOptions = {
   origin(origin, callback) {
     // Server-to-server calls (no Origin header) should still work.
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
+    const normalized = normalizeOrigin(origin);
+    if (allowedOriginsSet.has(normalized)) return callback(null, true);
     // Error емес false: кейбір ортада OPTIONS 500 болып CORS headerсыз қалуы мүмкін
     return callback(null, false);
   },
   methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "Accept",
+    "Origin",
+    "X-Requested-With",
+  ],
   optionsSuccessStatus: 204,
 };
 
