@@ -271,6 +271,9 @@ html, body {
     box-shadow: 0 -4px 20px rgba(15, 77, 15, 0.15);
     border-radius: 20px;
     border: 1px solid rgba(15, 77, 15, 0.08);
+    /* Жүктеу/қате оверлейінен жоғары — төменгі навигация әрқашан басылсын */
+    z-index: 10050;
+    pointer-events: auto;
 }
 
 .bottom-nav a {
