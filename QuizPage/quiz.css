@@ -26,6 +26,66 @@ body::before {
 
 body > * { position: relative; z-index: 1; }
 
+html, body {
+    overflow-x: hidden;
+}
+
+/* Error/Loading overlay */
+#quiz-status-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+}
+
+.quiz-status-card {
+    width: 100%;
+    max-width: 520px;
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid rgba(37, 108, 64, 0.12);
+    box-shadow: 0 14px 34px rgba(20, 50, 36, 0.25);
+    padding: 16px 16px 14px;
+    color: #143224;
+}
+
+.quiz-status-card h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+#quiz-status-message {
+    margin: 10px 0 0;
+    color: rgba(20, 50, 36, 0.75);
+    line-height: 1.55;
+}
+
+#quiz-status-details {
+    margin: 12px 0 0;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(20, 50, 36, 0.04);
+    border: 1px dashed rgba(20, 50, 36, 0.15);
+    font-size: 12px;
+    color: rgba(20, 50, 36, 0.7);
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 180px;
+    overflow: auto;
+}
+
+.quiz-status-actions {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 /* Курс карточкалары */
 .courses-row {
@@ -283,6 +343,39 @@ body > * { position: relative; z-index: 1; }
     padding: 0px;
 }
 
+/* Mobile responsive fixes */
+@media (max-width: 520px) {
+    body {
+        max-width: 100%;
+        padding: 10px;
+        padding-bottom: 100px;
+    }
+
+    .quiz-tabs {
+        padding: 10px;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .quiz-tab-btn {
+        padding: 12px 12px;
+        font-size: 13px;
+        border-radius: 12px;
+        flex: 1 1 220px;
+    }
+
+    .lessons-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* Some legacy blocks in this file set min-width:250px; disable on phones */
+    .course-card {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+}
+
 .lazyColumnLesson {
     display: flex;
     flex-direction: column;
@@ -320,8 +413,14 @@ body > * { position: relative; z-index: 1; }
 
 .lessonTitle h2 {
     font-family: "Inter", sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     margin: 0;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
 }
 
 .lessonTitle p {

@@ -1,6 +1,11 @@
 // firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+import {
+  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
 // Сенің Firebase жобасы конфигі
 const firebaseConfig = {
@@ -14,4 +19,18 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+
+// IndexedDB cache: қайта кіріп-шығуда тез жүктеледі және интернет әлсіз кезде көмектеседі.
+// Егер браузер қолдамаса/қате болса, fallback ретінде getFirestore қолданылады.
+let dbInstance = null;
+try {
+  dbInstance = initializeFirestore(app, {
+    localCache: persistentLocalCache({
+      tabManager: persistentMultipleTabManager(),
+    }),
+  });
+} catch (e) {
+  dbInstance = getFirestore(app);
+}
+
+export const db = dbInstance;

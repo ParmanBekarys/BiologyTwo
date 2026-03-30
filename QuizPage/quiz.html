@@ -19,6 +19,18 @@
 
 <body>
 
+    <!-- Қате/офлайн/ұзақ жүктеу кезінде көрсетілетін қабат -->
+    <div id="quiz-status-overlay" style="display:none;">
+        <div class="quiz-status-card">
+            <h3 id="quiz-status-title">Жүктелуде...</h3>
+            <p id="quiz-status-message" style="margin-top:10px;"></p>
+            <pre id="quiz-status-details" style="display:none;"></pre>
+            <div class="quiz-status-actions">
+                <button type="button" id="quiz-status-retry" class="startButton">Қайта көру</button>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Сабақтар мен тесттер тізімі -->
     <div id="lessons-view">

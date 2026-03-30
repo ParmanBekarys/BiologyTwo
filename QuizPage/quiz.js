@@ -19,6 +19,90 @@ const lessonId = urlParams.get("id");
 const standaloneId = urlParams.get("standaloneId");
 const testType = urlParams.get("type");
 
+const statusOverlay = document.getElementById("quiz-status-overlay");
+const statusTitleEl = document.getElementById("quiz-status-title");
+const statusMsgEl = document.getElementById("quiz-status-message");
+const statusDetailsEl = document.getElementById("quiz-status-details");
+const statusRetryBtn = document.getElementById("quiz-status-retry");
+
+function showStatus({ title, message, details, showRetry = true }) {
+  if (!statusOverlay) return;
+  statusOverlay.style.display = "block";
+  if (statusTitleEl) statusTitleEl.textContent = title || "Қате";
+  if (statusMsgEl) statusMsgEl.textContent = message || "";
+  if (statusDetailsEl) {
+    const txt = details ? String(details) : "";
+    statusDetailsEl.textContent = txt;
+    statusDetailsEl.style.display = txt ? "block" : "none";
+  }
+  if (statusRetryBtn) statusRetryBtn.style.display = showRetry ? "inline-flex" : "none";
+}
+
+function hideStatus() {
+  if (!statusOverlay) return;
+  statusOverlay.style.display = "none";
+}
+
+function isLikelyOfflineError(err) {
+  const msg = String(err?.message || err || "");
+  return (
+    msg.toLowerCase().includes("offline") ||
+    msg.toLowerCase().includes("could not reach cloud firestore backend") ||
+    msg.toLowerCase().includes("network") ||
+    msg.toLowerCase().includes("failed to fetch")
+  );
+}
+
+async function withTimeout(promise, ms, label) {
+  let t = null;
+  const timeoutPromise = new Promise((_, reject) => {
+    t = setTimeout(() => {
+      reject(new Error(`${label || "Request"} timeout after ${ms}ms`));
+    }, ms);
+  });
+  try {
+    return await Promise.race([promise, timeoutPromise]);
+  } finally {
+    if (t) clearTimeout(t);
+  }
+}
+
+function formatFriendlyError(err) {
+  const msg = String(err?.message || err || "");
+  if (!navigator.onLine || isLikelyOfflineError(err)) {
+    return {
+      title: "Интернет байланысы жоқ",
+      message:
+        "Қазір интернет әлсіз немесе Firestore жауап бермей тұр. Интернетті тексеріп, қайта көріңіз.",
+      details: msg,
+    };
+  }
+  if (msg.toLowerCase().includes("permission_denied")) {
+    return {
+      title: "Рұқсат жоқ (PERMISSION_DENIED)",
+      message:
+        "Firestore rules рұқсат бермейді. Админ rules-ты тексерсін немесе аккаунтпен қайта кіріңіз.",
+      details: msg,
+    };
+  }
+  if (msg.toLowerCase().includes("failed_precondition") && msg.toLowerCase().includes("index")) {
+    return {
+      title: "Индекс керек (FAILED_PRECONDITION)",
+      message: "Firestore индексі жоқ. Console-дегі 'Create index' сілтемесімен индекс жасаңыз.",
+      details: msg,
+    };
+  }
+  return {
+    title: "Қате болды",
+    message: "Деректерді жүктеу кезінде қате шықты. Қайта көріңіз.",
+    details: msg,
+  };
+}
+
+if (statusRetryBtn) {
+  statusRetryBtn.addEventListener("click", () => window.location.reload());
+}
+
 if (lessonId && testType !== "standalone") {
   lessonsView.style.display = "none";
   testView.style.display = "block";
@@ -51,7 +135,17 @@ function initQuizTabs() {
 
 async function loadLessons() {
   try {
-    const querySnapshot = await getDocs(collection(db, "lessons"));
+    showStatus({
+      title: "Жүктелуде...",
+      message: "Сабақ тесттері жүктеліп жатыр. Күте тұрыңыз.",
+      showRetry: false,
+    });
+
+    const querySnapshot = await withTimeout(
+      getDocs(collection(db, "lessons")),
+      12000,
+      "lessons"
+    );
 
     querySnapshot.forEach((docSnap) => {
       const lesson = docSnap.data();
@@ -75,10 +169,12 @@ async function loadLessons() {
 
       container.appendChild(card);
     });
+    hideStatus();
   } catch (error) {
     console.error("Сабақтарды жүктеу қатесі:", error);
-    container.innerHTML =
-      "<p>Сабақтарды жүктеу кезінде қате пайда болды 😕</p>";
+    const f = formatFriendlyError(error);
+    showStatus({ ...f, showRetry: true });
+    container.innerHTML = "";
   }
 }
 
@@ -100,7 +196,11 @@ async function loadStandaloneTests() {
         completedIds = userSnap.data().completedStandaloneTests || [];
       }
     }
-    const querySnapshot = await getDocs(collection(db, "standaloneTests"));
+    const querySnapshot = await withTimeout(
+      getDocs(collection(db, "standaloneTests")),
+      12000,
+      "standaloneTests"
+    );
     if (querySnapshot.empty) {
       standaloneContainer.innerHTML = `
         <div style="grid-column:1/-1;text-align:center;padding:30px;color:#666;background:white;border-radius:15px;">
@@ -140,15 +240,27 @@ async function loadStandaloneTests() {
     });
   } catch (err) {
     console.error(err);
-    standaloneContainer.innerHTML = "<p style='color:#666;'>Тесттерді жүктеу қатесі</p>";
+    const f = formatFriendlyError(err);
+    showStatus({ ...f, showRetry: true });
+    standaloneContainer.innerHTML = "";
   }
 }
 
 async function loadAndShowStandaloneTest(testId) {
   try {
-    const testSnap = await getDoc(doc(db, "standaloneTests", testId));
+    showStatus({
+      title: "Жүктелуде...",
+      message: "Тест жүктеліп жатыр. Күте тұрыңыз.",
+      showRetry: false,
+    });
+    const testSnap = await withTimeout(
+      getDoc(doc(db, "standaloneTests", testId)),
+      12000,
+      "standaloneTest"
+    );
     if (!testSnap.exists()) {
       document.getElementById("questions-container").innerHTML = "<p>Тест табылмады 😕</p>";
+      hideStatus();
       return;
     }
     const test = testSnap.data();
@@ -157,12 +269,16 @@ async function loadAndShowStandaloneTest(testId) {
     if (questions.length === 0) {
       document.getElementById("questions-container").innerHTML =
         "<p class='no-questions'>Әзірге сұрақтар жоқ.</p>";
+      hideStatus();
       return;
     }
+    hideStatus();
     renderQuiz(questions, test.timeLimit || 15, testId);
   } catch (err) {
     console.error(err);
-    document.getElementById("questions-container").innerHTML = "<p>Тестті жүктеу қатесі 😕</p>";
+    const f = formatFriendlyError(err);
+    showStatus({ ...f, showRetry: true });
+    document.getElementById("questions-container").innerHTML = "";
   }
 }
 
@@ -188,14 +304,24 @@ async function saveStandaloneTestPoints(testId, correctCount) {
 
 async function loadAndShowTest(lessonId) {
   try {
-    const [lessonSnap, questionsSnap] = await Promise.all([
-      getDoc(doc(db, "lessons", lessonId)),
-      getDoc(doc(db, "questions", lessonId)),
-    ]);
+    showStatus({
+      title: "Жүктелуде...",
+      message: "Тест сұрақтары жүктеліп жатыр. Күте тұрыңыз.",
+      showRetry: false,
+    });
+    const [lessonSnap, questionsSnap] = await withTimeout(
+      Promise.all([
+        getDoc(doc(db, "lessons", lessonId)),
+        getDoc(doc(db, "questions", lessonId)),
+      ]),
+      12000,
+      "lesson+questions"
+    );
 
     if (!lessonSnap.exists()) {
       document.getElementById("questions-container").innerHTML =
         "<p>Сабақ табылмады 😕</p>";
+      hideStatus();
       return;
     }
 
@@ -209,14 +335,17 @@ async function loadAndShowTest(lessonId) {
     if (questions.length === 0) {
       document.getElementById("questions-container").innerHTML =
         "<p class='no-questions'>Әзірге сұрақтар жоқ. Админ панельден қосыңыз.</p>";
+      hideStatus();
       return;
     }
 
+    hideStatus();
     renderQuiz(questions);
   } catch (error) {
     console.error("Тестті жүктеу қатесі:", error);
-    document.getElementById("questions-container").innerHTML =
-      "<p>Тестті жүктеу кезінде қате пайда болды 😕</p>";
+    const f = formatFriendlyError(error);
+    showStatus({ ...f, showRetry: true });
+    document.getElementById("questions-container").innerHTML = "";
   }
 }
 
